@@ -19,6 +19,7 @@ Private bigger As Boolean, same As Boolean, regline As String
 Private gpuP(400, 400) As Long
 Const maxL = 65500
 Private Const down As Integer = 0
+Private Const up As Integer = 1
 Private Const clk As Integer = 2
 Private Const dbclk As Integer = 3
 Private Const move0 As Integer = 4
@@ -31,24 +32,24 @@ On Error GoTo err0
 Dim x1 As Integer, x0 As Integer
 
 Select Case LCase(cm)
-    Case "int", "ï¿½ï¿½ï¿½ï¿½"
+    Case "int", "ÕûÊý"
         lookfree 0, a
-    Case "dbl", "Ð¡ï¿½ï¿½", "Êµï¿½ï¿½"
+    Case "dbl", "Ð¡Êý", "ÊµÊý"
         lookfree 1, a
-    Case "chr", "ï¿½Ö½ï¿½", "ï¿½Ö·ï¿½"
+    Case "chr", "×Ö½Ú", "×Ö·û"
         lookfree 2, a
-    Case "space", "Ê¹ï¿½ï¿½", "ï¿½Õ¼ï¿½"
+    Case "space", "Ê¹ÓÃ", "¿Õ¼ä"
         Maxspace = Val(a)
-    Case "str", "ï¿½Ö·ï¿½ï¿½ï¿½"
+    Case "str", "×Ö·û´®"
         lookfree 3, a
-    Case "allfre", "ï¿½ï¿½ï¿½ï¿½"
+    Case "allfre", "ÇåÁã"
         For i = 0 To Val(a)
              Bo(i) = "": ox(i) = ""
              Nx1(i) = "": xI(i) = 0
              Nd(i) = "": D(i) = 0
             Nc(i) = "": C(i) = 0
         Next i
-    Case "tfre", "È«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", "ï¿½ï¿½Ê¼ï¿½ï¿½"
+    Case "tfre", "È«²¿ÇåÁã", "³õÊ¼»¯"
         For i = 0 To Maxspace
             If Bo(i) = a Then Bo(i) = "": GoTo xx
             If Nx1(i) = a Then Nx1(i) = "": GoTo xx
@@ -86,35 +87,35 @@ find0:
 
     Case "pause"
         nw = maxL
-    Case "lgoto", "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ª"
+    Case "lgoto", "´óÓÚÌø×ª"
     
         If bigger Then nw = Val(a) - 1
-    Case "isgoto", "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ª"
+    Case "isgoto", "µÈÓÚÌø×ª"
         If same Then nw = Val(a) - 1
-    Case "sgoto", "Ð¡ï¿½ï¿½ï¿½ï¿½×ª"
+    Case "sgoto", "Ð¡ÓÚÌø×ª"
         If (Not bigger) And (Not same) Then nw = Val(a) - 1
-    Case "goto", "ï¿½ï¿½×ª"
+    Case "goto", "Ìø×ª"
         nw = Val(a) - 1
-    Case "errgoto", "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ª"
+    Case "errgoto", "´íÎóÌø×ª"
         errlinE = Val(a)
-    Case "toi", "ï¿½ï¿½ï¿½ï¿½Öµ"
+    Case "toi", "Õû¸³Öµ"
         For i = 0 To Maxspace
             If Nx1(i) = a Then x1 = i
         Next i
     xI(x1) = Val(b)
     Case "sleep"
         Sleep getint(a)
-    Case "tod", "Êµï¿½ï¿½Öµ", "Ð¡ï¿½ï¿½ï¿½ï¿½Öµ"
+    Case "tod", "Êµ¸³Öµ", "Ð¡Êý¸³Öµ"
         For i = 0 To Maxspace
             If D(i) = a Then x1 = i
         Next i
     D(x1) = Val(b)
-    Case "tos", "ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½Öµ"
+    Case "tos", "×Ö·û´®¸³Öµ"
         For i = 0 To Maxspace
             If Bo(i) = a Then x1 = i
         Next i
         ox(x1) = b
-    Case "tob", "ï¿½Ö½Ú¸ï¿½Öµ"
+    Case "tob", "×Ö½Ú¸³Öµ"
         For i = 0 To Maxspace
             If C(i) = a Then x1 = i
         Next i
@@ -179,54 +180,54 @@ m = can1
 n = can2
 
     Select Case LCase(smc)
-        Case "ï¿½ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", "addi"
+        Case "ÕûºÍ", "Õû¼Ó", "ÕûÊý¼Ó", "ÕûÊýºÍ", "addi"
             xI(can1) = xI(can1) + xI(can2)
-        Case "ï¿½òµ¥ºï¿½", "ï¿½òµ¥¼ï¿½", "ï¿½ï¿½Õ¹ï¿½ï¿½", "ï¿½ï¿½Õ¹ï¿½ï¿½", "addx"
+        Case "¼òµ¥ºÍ", "¼òµ¥¼Ó", "À©Õ¹¼Ó", "À©Õ¹ºÍ", "addx"
             D(can1) = D(can1) + xI(can2)
-        Case "Ð¡ï¿½ï¿½ï¿½ï¿½", "Ð¡ï¿½ï¿½ï¿½ï¿½", "Êµï¿½ï¿½ï¿½ï¿½", "Êµï¿½ï¿½ï¿½ï¿½", "addd"
+        Case "Ð¡Êý¼Ó", "Ð¡ÊýºÍ", "ÊµÊý¼Ó", "ÊµÊýºÍ", "addd"
             D(can1) = D(can1) + D(can2)
         Case "rnd"
             D(can1) = Rnd
-        Case "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", "movi"
+        Case "Õû¿½±´", "ÕûÒÆ", "ÕûÊý¿½±´", "ÕûÊýÒÆ", "movi"
             xI(can1) = xI(can2)
-        Case "Êµï¿½ï¿½ï¿½ï¿½", "Êµï¿½ï¿½", "Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", "Êµï¿½ï¿½ï¿½ï¿½", "movd"
+        Case "Êµ¿½±´", "ÊµÒÆ", "ÊµÊý¿½±´", "ÊµÊýÒÆ", "movd"
             D(can1) = D(can2)
-        Case "ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", "ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½", "movb"
+        Case "×Ö·û´®¿½±´", "×Ö·û´®ÒÆ", "movb"
             ox(can1) = ox(can2)
-        Case "ï¿½Ö½Ú¿ï¿½ï¿½ï¿½", "ï¿½Ö½ï¿½ï¿½ï¿½", "movc"
+        Case "×Ö½Ú¿½±´", "×Ö½ÚÒÆ", "movc"
             C(can1) = C(can2)
             
-        Case "ï¿½ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", "subi"
+        Case "Õû²î", "ÕûÊý²î", "subi"
             xI(can1) = xI(can1) - xI(can2)
-        Case "Êµï¿½ï¿½", "Êµï¿½ï¿½ï¿½ï¿½", "subd"
+        Case "Êµ²î", "ÊµÊý²î", "subd"
             D(can1) = D(can1) - D(can2)
-        Case "Êµï¿½ï¿½ï¿½ï¿½", "dsubi"
+        Case "Êµ²îÕû", "dsubi"
             D(can1) = D(can1) - xI(can2)
-        Case "ï¿½ï¿½ï¿½ï¿½Êµ", "isubd"
+        Case "Õû²îÊµ", "isubd"
             xI(can1) = Fix(xI(can1) - D(can2))
-        Case "fix", "È¡ï¿½ï¿½"
+        Case "fix", "È¡Õû"
             xI(can1) = Fix(D(xan2))
-        'ï¿½Ë³ï¿½
-        Case "divi", "ï¿½ï¿½ï¿½ï¿½Ä£", "ï¿½ï¿½ï¿½ï¿½Ä£"
+        '³Ë³ý
+        Case "divi", "Õû³ýÄ£", "ÕûÉÌÄ£"
             ma = xI(can1) \ xI(can2)
             pa = xI(can1) Mod xI(can2)
             xI(can1) = ma
             xI(can2) = pa
-        Case "divd", "ï¿½ï¿½"
+        Case "divd", "³ý"
             D(can1) = D(can1) / D(can2)
-        Case "idivd", "ï¿½ï¿½ï¿½ï¿½Êµ"
+        Case "idivd", "Õû³ýÊµ"
             D(can1) = xI(can1) / D(can2)
-        Case "ddivi", "Êµï¿½ï¿½ï¿½ï¿½"
+        Case "ddivi", "Êµ³ýÕû"
             D(can1) = D(can1) / xI(can2)
             
-        Case "muli", "ï¿½ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½"
+        Case "muli", "Õû»ý", "Õû³Ë"
             xI(can1) = xI(can1) * xI(can2)
-        Case "mulx", "ï¿½ï¿½ï¿½ï¿½Êµ", "ï¿½ï¿½Êµï¿½ï¿½"
+        Case "mulx", "Õû³ËÊµ", "ÕûÊµ»ý"
             D(can1) = D(can1) * xI(can2)
-        Case "muld", "Êµï¿½ï¿½", "Êµï¿½ï¿½"
+        Case "muld", "Êµ»ý", "Êµ³Ë"
             D(can1) = D(can1) * D(can2)
-        'ï¿½È½ï¿½
-        Case "cmpi", "ï¿½ï¿½ï¿½È½ï¿½"
+        '±È½Ï
+        Case "cmpi", "Õû±È½Ï"
             If xI(m) > xI(n) Then
                 bigger = True
                 same = False
@@ -238,54 +239,54 @@ n = can2
                 End If
                 bigger = False
             End If
-        Case "cmpd", "Êµï¿½È½ï¿½"
+        Case "cmpd", "Êµ±È½Ï"
             If D(m) > D(n) Then
                 bigger = True
             Else
                 bigger = False
             End If
-        Case "cmps", "ï¿½Ö·ï¿½ï¿½ï¿½ï¿½È½ï¿½"
+        Case "cmps", "×Ö·û´®±È½Ï"
             same = False
             If ox(m) = ox(n) Then same = True
-        '×ªï¿½ï¿½
-        Case "i2c", "ï¿½ï¿½×ªï¿½ï¿½"
+        '×ª»»
+        Case "i2c", "Õû×ª¶Ì"
             C(can2) = xI(can1) Mod 256
-        Case "i2d", "ï¿½ï¿½×ªÊµ"
+        Case "i2d", "Õû×ªÊµ"
             D(can2) = xI(can1)
-        Case "d2i", "Êµ×ªï¿½ï¿½"
+        Case "d2i", "Êµ×ªÕû"
             xI(can2) = Fix(D(can1))
-        Case "s2d", "È¡Êµï¿½ï¿½"
+        Case "s2d", "È¡ÊµÊý"
             D(can2) = Val(ox(can1))
-        Case "d2s", "Êµ×ªï¿½Ö·ï¿½ï¿½ï¿½"
+        Case "d2s", "Êµ×ª×Ö·û´®"
             ox(can2) = CStr(D(can1))
-        Case "s2i", "È¡ï¿½ï¿½ï¿½ï¿½"
+        Case "s2i", "È¡ÕûÊý"
             xI(can2) = Val(ox(can1))
-        Case "i2s", "ï¿½ï¿½×ªï¿½Ö·ï¿½ï¿½ï¿½"
+        Case "i2s", "Õû×ª×Ö·û´®"
             ox(can2) = CStr(xI(can1))
-        'ï¿½Ö·ï¿½ï¿½ï¿½
-        Case "mid", "È¡ï¿½ï¿½ï¿½ï¿½", "È¡ï¿½ï¿½"
+        '×Ö·û´®
+        Case "mid", "È¡µ¥×Ö", "È¡×Ö"
             ox(m) = Mid(ox(m), xI(n), 1)
-        Case "connect", "ï¿½ï¿½ï¿½ï¿½"
+        Case "connect", "Á¬½Ó"
             ox(m) = ox(m) + ox(n)
-        Case "leftcut", "È¡ï¿½ï¿½", "ï¿½ï¿½ï¿½È¡"
+        Case "leftcut", "È¡×ó", "×ó½ØÈ¡"
             ox(m) = Left(ox(m), xI(n))
-        Case "rightcut", "È¡ï¿½ï¿½", "ï¿½Ò½ï¿½È¡"
+        Case "rightcut", "È¡ÓÒ", "ÓÒ½ØÈ¡"
             ox(m) = Right(ox(m), xI(n))
-        'ï¿½ï¿½ï¿½ï¿½
-        Case "ini", "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"
+        'ÊäÈë
+        Case "ini", "ÊäÈëÕû", "ÊäÈëÕûÊý"
             xI(can1) = Fix(Val(InputBox(g)))
-        Case "ind", "ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½Êµ"
+        Case "ind", "ÊäÈëÊµÊý", "ÊäÈëÊµ"
             D(can1) = Val(InputBox(g))
-        Case "ins", "ï¿½ï¿½ï¿½ï¿½"
+        Case "ins", "ÊäÈë"
             ox(can1) = InputBox(g)
-        'ï¿½ï¿½ï¿½
-        Case "outs", "ï¿½ï¿½ï¿½"
+        'Êä³ö
+        Case "outs", "Êä³ö"
             MsgBox ox(can1)
-        Case "outd", "ï¿½ï¿½ï¿½Êµï¿½ï¿½", "ï¿½ï¿½ï¿½Êµ"
+        Case "outd", "Êä³öÊµÊý", "Êä³öÊµ"
             MsgBox D(can1)
-        Case "outi", "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½ï¿½"
+        Case "outi", "Êä³öÕûÊý", "Êä³öÕû"
             MsgBox xI(can1)
-        Case "outg", "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾", "ï¿½ï¿½ï¿½ï¿½Ê¾", "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾"
+        Case "outg", "ÊäÈëÌáÊ¾", "ÉèÌáÊ¾", "ÉèÖÃÌáÊ¾"
             g = ox(m)
         Case Else
             trAns LCase(smc), can1, can2
@@ -366,9 +367,9 @@ us = Right(us, Len(us) - xxx)
 End Function
 Private Sub trAns(str As String, a As Integer, Optional b As Integer)
 Select Case str
-    Case "gettime", "ï¿½ï¿½È¡Ê±ï¿½ï¿½", "Ê±ï¿½ï¿½"
+    Case "gettime", "»ñÈ¡Ê±¼ä", "Ê±¼ä"
         ox(a) = CStr(Time)
-    Case "iferr", "È¡ï¿½ï¿½ï¿½ï¿½Öµ", "È¡ï¿½ï¿½ï¿½ï¿½"
+    Case "iferr", "È¡´íÎóÖµ", "È¡´íÎó"
         ox(a) = CStr(error0)
         error0 = ""
     Case "system"
