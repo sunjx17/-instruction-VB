@@ -1,0 +1,53 @@
+
+errgoto ERRto
+func_main:
+start:
+:dbl a
+:dbl b
+:dbl c
+:str v
+:str temp
+:str put
+:
+:tos v 输入数值以相乘
+:outg v
+:
+:ind a
+:ind b
+:
+:movd c a
+:muld a b
+:
+:tos v *
+:d2s c temp
+:connect put temp
+:connect put v
+:d2s b temp
+:connect put temp
+:tos v =
+:connect put v
+:d2s a temp
+:connect put temp
+:outs put
+:
+:tos v 退出请输入0或非数字字符
+:outg v
+:ind a
+:int xx
+:int 0
+:toi 0 0
+:d2i a xx
+:cmpi xx 0
+:isgoto end
+:allfre 5
+:goto start
+end_main:
+
+ERRto:
+:allfre 5
+:iferr v
+:outs v
+:allfre 1
+:goto start
+
+end:

@@ -1,0 +1,32 @@
+int x
+int y
+int n
+int end
+toi x 0
+toi y 0
+toi n 10
+toi end 400
+:
+:
+str v
+tos v loaded!
+:
+for1:
+	:toi x 0
+	for2:
+		:gpu topoint x,y,
+		:gpu pset 0,0,0,
+		:addi x n
+	:cmpi x end
+	:sgoto for2
+addi y n
+cmpi y end
+sgoto for1
+
+gpu show
+sleep 5
+gpu rfs:
+outs v
+sleep 6000
+outs v:
+exit 0

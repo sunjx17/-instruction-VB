@@ -1,0 +1,5 @@
+str x
+tos x a
+include y.myc
+movi a b
+outi a

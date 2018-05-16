@@ -1,0 +1,36 @@
+start:
+dbl a
+dbl b
+str v
+tos v 输入数值以相乘
+outg v
+ind a
+ind b
+dbl c
+movd c a
+muld a b
+tos v *
+str put
+str temp
+d2s c temp
+connect put temp
+connect put v
+d2s b temp
+connect put temp
+tos v =
+connect put v
+d2s a temp
+connect put temp
+outs put
+tos v 退出请直接确认
+outg v
+ind a
+int xx
+int 0
+toi 0 0
+d2i a xx
+cmpi xx 0
+isgoto end
+allfre 3
+goto start
+end:

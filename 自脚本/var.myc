@@ -1,0 +1,26 @@
+00:int c
+01:toi c 1
+02:int end
+03:ini end
+04:int x
+05:toi x 1000
+06:int a
+07:toi a 0
+08:int b
+09:str endmsg
+10:tos endmsg Íê³É
+11:toi b 0
+12:addi end c
+13:
+:addi b a
+:addi a c
+:cmpi end a
+:lgoto 13
+outi b
+toi a 0
+toi b 0
+ini end
+addi end c
+cmpi end x
+lgoto 13
+outs endmsg

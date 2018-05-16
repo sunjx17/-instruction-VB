@@ -1,0 +1,156 @@
+模板:
+int x1
+int x2
+int red
+toi red 228
+int green
+toi green 0
+int blue
+toi blue 222
+int y1
+int y2
+
+toi x2 300
+toi y2 3
+toi x1 1
+toi y1 400
+int linex1
+int liney1
+int linex2
+int liney2
+movi linex1 x1
+movi linex2 x2
+movi liney1 y1
+movi liney2 y2
+int line0
+gpu show 0
+call line line0
+fre line0
+
+
+toi x2 400
+toi y2 200
+toi x1 0
+toi y1 200
+int linex1
+int liney1
+int linex2
+int liney2
+movi linex1 x1
+movi linex2 x2
+movi liney1 y1
+movi liney2 y2
+int line0
+gpu show 0
+call line line0
+fre line0
+
+toi x2 1
+toi y2 1
+toi x1 400
+toi y1 200
+int linex1
+int liney1
+int linex2
+int liney2
+movi linex1 x1
+movi linex2 x2
+movi liney1 y1
+movi liney2 y2
+int line0
+gpu show 0
+call line line0
+str v
+tos v OK
+outs v
+exit;
+
+*********************************************************:
+line:
+注 本程序绘制一条从x1，y1到x2，y2的线 参数line??外部定义内部释放,参数red green blue为全局参数不释放:
+
+:int xstab
+:int ystab
+movi xstab linex2
+movi ystab liney2
+subi xstab linex1
+subi ystab liney1
+
+int absi
+movi absi xstab
+int abs0
+call abs abs0
+:int absx
+movi absx absi
+movi absi ystab
+call abs abs0
+:int absy
+movi absy absi
+fre absi
+fre abs0
+:dbl stepline
+:dbl nowline
+cmpi absx absy
+gpu topoint linex1,liney1,
+gpu pset red,green,blue,
+lgoto yissmaller
+goto xissmaller
+
+linegoingtoret:
+fre xstab
+fre ystab
+fre absx
+fre absy
+fre linex1
+fre linex2
+fre liney1
+fre liney2
+fre stepline
+fre nowline
+return line0
+
+yissmaller:
+i2d ystab stepline
+i2d liney1 nowline
+ddivi stepline xstab
+divi absx xstab
+mulx stepline absx
+nextlinep:
+	:addi linex1 absx
+	:addd nowline stepline
+	:d2i nowline liney1
+	:gpu topoint linex1,liney1,
+	:gpu pset red,green,blue,
+	:cmpi linex1 linex2
+	:isgoto linegoingtoret
+goto nextlinep
+
+xissmaller:
+i2d xstab stepline
+i2d linex1 nowline
+ddivi stepline ystab
+divi absy ystab
+mulx stepline absy
+nextlinepx:
+	:addi liney1 absy
+	:addd nowline stepline
+	:d2i nowline linex1
+	:gpu topoint linex1,liney1,
+	:gpu pset red,green,blue,
+	:cmpi liney1 liney2
+	:isgoto linegoingtoret
+goto nextlinepx
+*********************************************************:
+外部定义并返回absi:
+abs:
+int abszero
+toi abszero 0
+cmpi absi abszero
+lgoto abspositive
+int absnegativemul
+toi absnegativemul -1
+muli absi absnegativemul
+abspositive:
+fre absnegativemul
+fre abszero
+return abs0

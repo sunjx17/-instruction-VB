@@ -1,0 +1,143 @@
+gpu show 0
+regdn dn
+regup up
+regmv mv
+str v
+tos v ÍË³ö0£¿
+outg v
+int xf
+int yf
+int r
+int g
+int b
+int r1
+int g1
+int b1
+int zero
+toi zero 0
+int fhd
+toi fhd 400
+int f
+toi f 150
+int fv
+toi fv 60
+int tmp
+int dw
+int one
+toi one 1
+int lst
+toi lst 3000
+int int0
+toi int0 1
+dbl q
+pause 0
+
+up:
+toi dw 0
+gpu pset r,g,b,
+ini tmp
+addi r tmp
+subi g tmp
+cmpi tmp zero
+isgoto end0
+cmpi tmp one
+isgoto end1
+pause 0
+:
+end0:
+exit 0
+pause 0
+:
+end1:
+int xi
+int yi
+int fh
+toi fh 401
+doy:
+cmpi yi fh
+isgoto loopy
+dox:
+cmpi xi fh
+isgoto loopx
+gpu topoint xi,yi,
+gpu rgb 255,255,255,
+addi xi one
+goto dox
+loopx:
+addi yi one
+toi xi 0
+goto doy
+loopy:
+gpu rfs 0
+fre xi
+fre yi
+fre fh
+pause 0
+
+
+mv:
+cmpi dw zero:
+isgoto nov:
+movi r1 r
+movi g1 g
+movi b1 b
+addi r1 fv
+addi g1 fv
+addi b1 fv
+gpu pset r1,g1,b1,
+addi r one
+addi r one
+movi tmp f
+divi r tmp
+movi r tmp
+:
+addi g one
+movi tmp f
+divi g tmp
+movi g tmp
+:
+addi b one
+addi b one
+addi b one
+movi tmp f
+divi b tmp
+movi b tmp
+:
+nov:
+pause 0
+
+dn:
+toi lst 60000
+nx:
+rnd q
+mulx q lst
+d2i q r
+rnd q
+mulx q lst
+d2i q g
+rnd q
+mulx q lst
+d2i q b
+movi tmp f
+divi r tmp
+movi r tmp
+movi tmp f
+divi g tmp
+movi g tmp
+movi tmp f
+divi b tmp
+movi b tmp
+rnd q
+mulx q fhd
+d2i q xf
+rnd q
+mulx q fhd
+d2i q yf
+gpu topoint xf,yf,
+gpu pset r,g,b,
+subi lst one
+cmpi lst zero
+lgoto nx
+toi dw 1
+pause 0
+

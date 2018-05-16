@@ -1,0 +1,67 @@
+space 20
+int x
+int a2
+toi a2 1
+int a1
+toi a1 -12
+int a0
+toi a0 28
+int one
+toi one 1
+int zero
+toi zero 0
+int end
+toi end 400
+int c
+toi c 20
+gpu show 0
+str v
+tos v loaded!
+outs v:
+for1:
+    :goto compute
+
+ret1:divi y c
+    :toi c 20
+    :cmpi y zero
+    :sgoto undw
+    :cmpi end y
+    :sgoto undw
+    :gpu topoint x,y,
+    :gpu pset 0,0,0,
+
+undw:addi x one
+    :cmpi a2 -1
+    :isgoto for2
+    :cmpi x end
+    :sgoto for1
+
+toi a2 -1
+toi a1 38
+toi a0 400
+goto ret1
+
+endf:
+outs v
+exit 0
+exit
+
+for2:
+cmpi x end
+sgoto ret1
+goto endf
+
+compute:
+fre y
+fre xx
+:int y
+:int xx
+movi xx x
+muli xx x
+muli xx a2
+movi y xx
+movi xx x
+muli xx a1
+addi y xx
+addi y a0
+goto ret1

@@ -1,0 +1,9 @@
+int a
+int b
+int c
+ini a
+ini b
+ini c
+divi a b
+outi a
+outi b

@@ -1,0 +1,52 @@
+int x1
+int x2
+int y1
+int y2
+str v
+tos v 请输入x1
+outg v
+ini x1
+tos v 请输入y1
+outg v
+ini y1
+tos v 请输入x2
+outg v
+ini x2
+tos v 请输入y2
+outg v
+ini y2
+
+int red
+int green
+int blue
+int line0
+int linex1
+int liney1
+int linex2
+int liney2
+movi linex1 x1
+movi linex2 x2
+movi liney1 y1
+movi liney2 y2
+gpu show 0
+call line line0
+fre line0
+regdn dn
+regmv mv
+tos v 完成
+regdn up
+pause 0
+
+up:
+outs v
+exit 0
+
+mv:
+gpu pset 0,0,0,
+pause 0
+
+dn:
+gpu pset 0,0,0, 
+pause 0
+
+include line.myc
